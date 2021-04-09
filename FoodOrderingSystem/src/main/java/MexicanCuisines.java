@@ -17,4 +17,8 @@ public class MexicanCuisines implements Cuisines{
     public Dish getDish(int index) {
         return mexicanDishList.get(index-1);
     }
+
+    public int getSize(){
+        return mexicanDishList.size();
+    }
 }

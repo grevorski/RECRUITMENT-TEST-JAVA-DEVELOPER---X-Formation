@@ -1,19 +1,10 @@
-public class Dish {
-    private String name;
-    private double price;
+public class Dish extends Item {
 
     public Dish(String name, double price) {
-        this.name = name;
-        this.price = price;
+        super(name, price);
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public double getPrice() {
-        return price;
-    }
+    int getSize() { return 0; }
 
     @Override
     public String toString() {

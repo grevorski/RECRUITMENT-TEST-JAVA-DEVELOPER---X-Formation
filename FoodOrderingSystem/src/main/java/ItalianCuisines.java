@@ -17,4 +17,8 @@ public class ItalianCuisines implements Cuisines{
     public Dish getDish(int index) {
         return italianDishList.get(index-1);
     }
+
+    public int getSize(){
+        return italianDishList.size();
+    }
 }

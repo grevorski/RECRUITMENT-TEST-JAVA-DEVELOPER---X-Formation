@@ -16,4 +16,8 @@ public class PolishCuisines implements Cuisines{
     public Dish getDish(int index){
        return polishDishList.get(index-1);
     }
+
+    public int getSize(){
+        return polishDishList.size();
+    }
 }

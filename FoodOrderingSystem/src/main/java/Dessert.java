@@ -1,28 +1,16 @@
 import java.util.ArrayList;
 
-public class Dessert {
-    private String name;
-    private double price;
+public class Dessert extends Item{
 
     public Dessert(String name, double price) {
-        this.name = name;
-        this.price = price;
+        super(name, price);
     }
 
-    public Dessert() {
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public double getPrice() {
-        return price;
-    }
+    public Dessert() {}
 
     @Override
     public String toString() {
-        return getName() + " " + getPrice();
+        return getName() + " " + getPrice() + "\n";
     }
 
     ArrayList<Dessert> desserts = new ArrayList<Dessert>();
@@ -39,5 +27,9 @@ public class Dessert {
 
     public Dessert getDessert(int index){
         return desserts.get(index-1);
+    }
+
+    public int getSize(){
+        return desserts.size();
     }
 }
