@@ -10,7 +10,7 @@ public class Dessert extends Item{
 
     @Override
     public String toString() {
-        return getName() + " " + getPrice() + "\n";
+        return getName() + " " + getPrice() ;
     }
 
     ArrayList<Dessert> desserts = new ArrayList<Dessert>();
@@ -21,7 +21,7 @@ public class Dessert extends Item{
 
     public void printDesserts(){
         for(int j=1,i = 0; i < desserts.size(); i++,j++) {
-            System.out.print(j +") " + desserts.get(i).toString());
+            System.out.print(j +") " + desserts.get(i).toString()+ "\n");
         }
     }
 

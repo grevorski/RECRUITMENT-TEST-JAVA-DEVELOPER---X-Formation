@@ -46,21 +46,56 @@ public class Menu {
                 Cuisines cuisines = (Cuisines) choseCuisines();
                 makeOrder(cuisines);
                 break;
-            case 2: //TODO wybranie drinka i zapytanie o lód/cytryne
-            case 3: //TODO wybranie kuchni i potrawy danie + deser , wybranie drinka i zapytanie o lód/cytryne
-
+            case 2:
+                drinkOrder();
+                break;
+            case 3:
+                Cuisines cuisines1 = (Cuisines) choseCuisines();
+                makeOrder(cuisines1);
+                drinkOrder();
+                break;
             default:
                 System.out.println("Error");
         }
     }
 
+    private void drinkOrder(){
+        Scanner sc = new Scanner(System.in);
+        displayHeader("DRINKS");
+        drink.printDrinks();
+        int choice = getChoice(drink);
+        do{
+            System.out.println("With: \n1)ice\n2)lemon\n3)without");
+            try {
+                choice = Integer.parseInt(sc.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid selection. Numbers only please.");
+            }
+            if(choice == 1 ) {
+                drink.isIce = true;
+                System.out.println("Ordered drink: " + drink.getDrink(choice) + " with ice");
+            }
+            else if(choice == 2) {
+                drink.isLemon = true;
+                System.out.println("Ordered drink: " + drink.getDrink(choice) + " with lemon" );
+            }
+            else if(choice == 3) {
+                drink.isLemon=false;
+                drink.isIce = false;
+                System.out.println("Ordered drink: " + drink.getDrink(choice) );
+            } else System.out.println("Choice outside of range. Please chose again.");
+        }while (choice < 0 || choice > 4);
+
+
+    }
+
     private Object choseCuisines(){
-        Scanner keyboard = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
         int choice = -1;
         do {
             System.out.print("Choose cuisines:\n1) Polish\n2) Italian\n3) Mexican\n");
             try {
-                choice = Integer.parseInt(keyboard.nextLine());
+                choice = Integer.parseInt(sc.nextLine());
             } catch (NumberFormatException e) {
                 System.out.println("Invalid selection. Numbers only please.");
             }
@@ -100,9 +135,9 @@ public class Menu {
         displayHeader("DESSERT");
         dessert.printDesserts();
         int dessertChoice = getChoice(dessert);
-        System.out.println("thank you for ordering lunch: " + input.getDish(choice) + "dessert: " + dessert.getDessert(dessertChoice));
-        exit = true;
+        System.out.println("Ordered lunch: " + input.getDish(choice) + "\nOrdered dessert: " + dessert.getDessert(dessertChoice));
     }
+
     private int getChoice(Cuisines c) {
         Scanner keyboard = new Scanner(System.in);
         int choice = -1;
@@ -135,10 +170,6 @@ public class Menu {
             }
         } while (choice < 0 || choice > item.getSize());
         return choice;
-    }
-
-    private void drinkOrder(){
-
     }
 
     public void runMenu() {

@@ -7,7 +7,9 @@ abstract class Item {
         this.price = price;
     }
 
-    public Item() { }
+    public Item() {
+
+    }
 
     public String getName(){
         return name;
