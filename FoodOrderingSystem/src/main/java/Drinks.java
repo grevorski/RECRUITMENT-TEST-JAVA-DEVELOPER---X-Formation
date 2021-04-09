@@ -1,17 +1,17 @@
 import java.util.ArrayList;
 
-public class Drink extends Item{
+public class Drinks extends Item{
     public boolean isIce = false;
     public boolean isLemon = false;
 
-    public Drink(String name, double price) { super(name, price); }
+    public Drinks(String name, double price) { super(name, price); }
 
-    ArrayList<Drink> drinks = new ArrayList<Drink>();
+    ArrayList<Drinks> drinks = new ArrayList<Drinks>();
 
-    public Drink() { super(); }
+    public Drinks() { super(); }
 
     public void addDrink(String name, double price){
-        drinks.add(new Drink(name,price));
+        drinks.add(new Drinks(name,price));
     }
 
     public int getSize(){
@@ -24,7 +24,7 @@ public class Drink extends Item{
         }
     }
 
-    public Drink getDrink(int index){
+    public Drinks getDrink(int index){
         return drinks.get(index-1);
     }
 

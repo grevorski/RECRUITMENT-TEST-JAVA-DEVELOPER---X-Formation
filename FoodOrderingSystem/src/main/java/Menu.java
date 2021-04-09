@@ -6,8 +6,8 @@ public class Menu {
     private final Cuisines polish = new PolishCuisines();
     private final Cuisines mexican = new MexicanCuisines();
     private final Cuisines italian = new ItalianCuisines();
-    private final Dessert dessert = new Dessert();
-    private final Drink drink = new Drink();
+    private final Desserts desserts = new Desserts();
+    private final Drinks drinks = new Drinks();
 
 
     private void printMenu() {
@@ -62,8 +62,8 @@ public class Menu {
     private void drinkOrder(){
         Scanner sc = new Scanner(System.in);
         displayHeader("DRINKS");
-        drink.printDrinks();
-        int choice = getChoice(drink);
+        drinks.printDrinks();
+        int choice = getChoice(drinks);
         do{
             System.out.println("With: \n1)ice\n2)lemon\n3)without");
             try {
@@ -72,17 +72,17 @@ public class Menu {
                 System.out.println("Invalid selection. Numbers only please.");
             }
             if(choice == 1 ) {
-                drink.isIce = true;
-                System.out.println("Ordered drink: " + drink.getDrink(choice) + " with ice");
+                drinks.isIce = true;
+                System.out.println("Ordered drink: " + drinks.getDrink(choice) + " with ice");
             }
             else if(choice == 2) {
-                drink.isLemon = true;
-                System.out.println("Ordered drink: " + drink.getDrink(choice) + " with lemon" );
+                drinks.isLemon = true;
+                System.out.println("Ordered drink: " + drinks.getDrink(choice) + " with lemon" );
             }
             else if(choice == 3) {
-                drink.isLemon=false;
-                drink.isIce = false;
-                System.out.println("Ordered drink: " + drink.getDrink(choice) );
+                drinks.isLemon=false;
+                drinks.isIce = false;
+                System.out.println("Ordered drink: " + drinks.getDrink(choice) );
             } else System.out.println("Choice outside of range. Please chose again.");
         }while (choice < 0 || choice > 4);
 
@@ -133,9 +133,9 @@ public class Menu {
         input.printDishes();
         int choice = getChoice(input);
         displayHeader("DESSERT");
-        dessert.printDesserts();
-        int dessertChoice = getChoice(dessert);
-        System.out.println("Ordered lunch: " + input.getDish(choice) + "\nOrdered dessert: " + dessert.getDessert(dessertChoice));
+        desserts.printDesserts();
+        int dessertChoice = getChoice(desserts);
+        System.out.println("Ordered lunch: " + input.getDish(choice) + "\nOrdered dessert: " + desserts.getDessert(dessertChoice));
     }
 
     private int getChoice(Cuisines c) {
@@ -196,14 +196,14 @@ public class Menu {
         mexican.addDish("quesadilla", 14.99);
         mexican.addDish("cos", 32.99);
 
-        dessert.addDessert("lody",12.22);
-        dessert.addDessert("lizak",9.99);
-        dessert.addDessert("ciastko",16.90);
-        dessert.addDessert("snikers",4.99);
+        desserts.addDessert("lody",12.22);
+        desserts.addDessert("lizak",9.99);
+        desserts.addDessert("ciastko",16.90);
+        desserts.addDessert("snikers",4.99);
 
-        drink.addDrink("kolka",5.90);
-        drink.addDrink("vodka",9.90);
-        drink.addDrink("łycha",12.90);
+        drinks.addDrink("kolka",5.90);
+        drinks.addDrink("vodka",9.90);
+        drinks.addDrink("łycha",12.90);
 
     }
 }
