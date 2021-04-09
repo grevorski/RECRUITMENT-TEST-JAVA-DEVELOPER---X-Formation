@@ -1,13 +1,14 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Menu {
 
     boolean exit;
+    public static PolishCuisines polish = new PolishCuisines();
+    public static MexicanCuisines mexican = new MexicanCuisines();
+    public static ItalianCuisines italian = new ItalianCuisines();
+    public static Dessert dessert = new Dessert();
 
-    public static void main(String[] args) {
-        Menu menu = new Menu();
-        menu.runMenu();
-    }
 
     private void printMenu() {
         displayHeader("Please make an order");
@@ -38,10 +39,12 @@ public class Menu {
     private void performAction(int choice) {
         switch (choice) {
             case 0:
-                System.out.println("Thank you for using our Ordering System.");
-                System.exit(0);
+                displayHeader("Thank you for using our Ordering System.");
+                exit = true;
                 break;
-            case 1: //TODO wybranie kuchni i potrawy danie + deser
+            case 1://TODO wybranie kuchni i potrawy danie + deser
+                makeOrder();
+                break;
             case 2: //TODO wybranie drinka i zapytanie o lód/cytryne
             case 3: //TODO wybranie kuchni i potrawy danie + deser , wybranie drinka i zapytanie o lód/cytryne
 
@@ -71,6 +74,21 @@ public class Menu {
         System.out.println("+-----------------------------------+");
     }
 
+    private void makeOrder(){
+        displayHeader("LUNCH");
+        polish.printDishes();
+        int choice = getMenuChoice();
+        displayHeader("DESSERT");
+        dessert.printDesserts();
+        int dessertChoice = getMenuChoice();
+        System.out.println("thank you for ordering lunch: " + polish.getDish(choice) + "dessert: " + dessert.getDessert(dessertChoice));
+        exit = true;
+    }
+
+    private void drinkOrder(){
+
+    }
+
     public void runMenu() {
         printHeader();
         while (!exit) {
@@ -78,5 +96,17 @@ public class Menu {
             int choice = getMenuChoice();
             performAction(choice);
         }
+    }
+    public void createMenu(){
+        polish.addDish("kotlet",9.99);
+        polish.addDish("zraz",29.99);
+        polish.addDish("kaczka",39.99);
+        polish.addDish("xD",42.99);
+        polish.addDish("123",94.99);
+
+        dessert.addDessert("lody",12.22);
+        dessert.addDessert("lizak",9.99);
+        dessert.addDessert("ciastko",16.90);
+        dessert.addDessert("snikers",4.99);
     }
 }
