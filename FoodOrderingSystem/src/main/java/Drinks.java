@@ -1,10 +1,9 @@
 import java.util.ArrayList;
 
-public class Drinks implements Items{
+public class Drinks implements Items<Drink>{
 
     private final ArrayList<Drink> drinks = new ArrayList<Drink>();
-    public boolean isIce = false;
-    public boolean isLemon = false;
+
 
     public int getSize(){
         return drinks.size();

@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Desserts implements Items {
+public class Desserts implements Items<Dessert> {
 
     private final List<Dessert> desserts = new ArrayList<Dessert>();
 

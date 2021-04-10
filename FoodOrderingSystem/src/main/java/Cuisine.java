@@ -1,41 +1,42 @@
 import java.util.*;
 
-public class AllCuisines {
-    public enum Enum {
+public class Cuisine {
+    public enum Type {
         POLISH,ITALIAN,MEXICAN;
     }
 
-    Map<Enum, ArrayList<Dish>> enumMap = new EnumMap<>(Enum.class);
+    private final Map<Type, ArrayList<Dish>> enumMap = new EnumMap<>(Type.class);
 
     public void initializeCuisines(){
-        for(Enum e : Enum.values()){
+        for(Type e : Type.values()){
             enumMap.put(e,new ArrayList<Dish>());
         }
     }
 
-    public void addDish(Enum e, String name, double price ){
+    public void addDish(Type e, String name, double price ){
         enumMap.get(e).add(new Dish(name,price));
     }
 
-    public void printDishes(Enum e) {
-        for(int j = 1, i = 0; i < Enum.values().length; i++,j++) {
+    public void printDishes(Type e) {
+        for(int j = 1, i = 0; i < getSize(e); i++,j++) {
             System.out.print(j +") " + enumMap.get(e).get(i).toString());
         }
     }
 
-    public Dish getDish(Enum e, int index) {
+    public Dish getDish(Type e, int index) {
         return enumMap.get(e).get(index-1);
     }
 
-    public int getSize(){
-        return Enum.values().length;
+
+
+    public int getSize(Type e){
+        return enumMap.get(e).size();
     }
 
     public void printCuisines(){
         int i = 1;
-        for (Enum s : Enum.values()) {
+        for (Type s : Type.values()) {
             System.out.println(i++ + ") " + s);
-
         }
     }
 }

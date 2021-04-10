@@ -8,7 +8,6 @@ abstract class Item {
         this.price = price;
     }
 
-
     public String getName(){
         return name;
     }
@@ -16,8 +15,5 @@ abstract class Item {
     public double getPrice(){
         return price;
     }
-
-
-
 
 }
