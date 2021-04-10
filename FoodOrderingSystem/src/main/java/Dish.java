@@ -1,11 +1,6 @@
 public class Dish extends Item {
 
-    public Dish(String name, double price) {
-        super(name, price);
-    }
-
-
-    int getSize() { return 0; }
+    public Dish(String name, double price) { super(name, price); }
 
     @Override
     public String toString() {

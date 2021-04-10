@@ -4,9 +4,8 @@ public class AllCuisines {
     public enum Enum {
         POLISH,ITALIAN,MEXICAN;
     }
-    //Map<Enum,ArrayList<Dish>> map = new HashMap<Enum,ArrayList<Dish>>();
 
-    Map<Enum, ArrayList<Dish>> enumMap = new EnumMap<Enum, ArrayList<Dish>>(Enum.class);
+    Map<Enum, ArrayList<Dish>> enumMap = new EnumMap<>(Enum.class);
 
     public void initializeCuisines(){
         for(Enum e : Enum.values()){
@@ -28,8 +27,15 @@ public class AllCuisines {
         return enumMap.get(e).get(index-1);
     }
 
-    public int getSize(Enum e){
+    public int getSize(){
         return Enum.values().length;
     }
 
+    public void printCuisines(){
+        int i = 1;
+        for (Enum s : Enum.values()) {
+            System.out.println(i++ + ") " + s);
+
+        }
+    }
 }

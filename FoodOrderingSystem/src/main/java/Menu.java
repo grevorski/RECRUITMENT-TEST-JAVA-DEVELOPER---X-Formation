@@ -3,8 +3,8 @@ import java.util.Scanner;
 public class Menu {
 
     boolean exit;
-    private final Dessert dessert = new Dessert();
-    private final Drink drink = new Drink();
+    private final Desserts desserts = new Desserts();
+    private final Drinks drinks = new Drinks();
     private final AllCuisines allCuisines = new AllCuisines();
 
     private void printMenu() {
@@ -59,29 +59,30 @@ public class Menu {
     private void drinkOrder(){
         Scanner sc = new Scanner(System.in);
         displayHeader("DRINKS");
-        drink.printDrinks();
-        int choice = getChoice(drink);
+        drinks.print();
+        int choice = getChoice(drinks);
+        int choice1 = -1;
         do{
             System.out.println("With: \n1)ice\n2)lemon\n3)without");
             try {
-                choice = Integer.parseInt(sc.nextLine());
+                choice1 = Integer.parseInt(sc.nextLine());
             } catch (NumberFormatException e) {
                 System.out.println("Invalid selection. Numbers only please.");
             }
-            if(choice == 1 ) {
-                drink.isIce = true;
-                System.out.println("Ordered drink: " + drink.getDrink(choice) + " with ice");
+            if(choice1 == 1 ) {
+                drinks.isIce = true;
+                System.out.println("Ordered drink: " + drinks.get(choice) + " with ice");
             }
-            else if(choice == 2) {
-                drink.isLemon = true;
-                System.out.println("Ordered drink: " + drink.getDrink(choice) + " with lemon" );
+            else if(choice1 == 2) {
+                drinks.isLemon = true;
+                System.out.println("Ordered drink: " + drinks.get(choice) + " with lemon" );
             }
-            else if(choice == 3) {
-                drink.isLemon=false;
-                drink.isIce = false;
-                System.out.println("Ordered drink: " + drink.getDrink(choice) );
+            else if(choice1 == 3) {
+                drinks.isLemon=false;
+                drinks.isIce = false;
+                System.out.println("Ordered drink: " + drinks.get(choice) );
             } else System.out.println("Choice outside of range. Please chose again.");
-        }while (choice < 0 || choice > 4);
+        }while (choice1 < 0 || choice1 > 4);
 
 
     }
@@ -90,7 +91,8 @@ public class Menu {
         Scanner sc = new Scanner(System.in);
         int choice = -1;
         do {
-            System.out.print("Choose cuisines:\n1) Polish\n2) Italian\n3) Mexican\n");
+            displayHeader("Choose cuisines:");
+            allCuisines.printCuisines();
             try {
                 choice = Integer.parseInt(sc.nextLine());
             } catch (NumberFormatException e) {
@@ -129,14 +131,14 @@ public class Menu {
     private void makeOrder(AllCuisines.Enum e){
         displayHeader("LUNCH");
         allCuisines.printDishes(e);
-        int choice = getChoice(e);
+        int choice = getLunchChoice();
         displayHeader("DESSERT");
-        dessert.printDesserts();
-        int dessertChoice = getChoice(dessert);
-        System.out.println("Ordered lunch: " + allCuisines.getDish(e,choice) + "\nOrdered dessert: " + dessert.getDessert(dessertChoice));
+        desserts.print();
+        int dessertChoice = getChoice(desserts);
+        System.out.println("Ordered lunch: " + allCuisines.getDish(e,choice) + "\nOrdered dessert: " + desserts.get(dessertChoice));
     }
 
-    private int getChoice(AllCuisines.Enum e) {
+    private int getLunchChoice() {
         Scanner keyboard = new Scanner(System.in);
         int choice = -1;
         do {
@@ -146,14 +148,14 @@ public class Menu {
             } catch (NumberFormatException exception) {
                 System.out.println("Invalid selection. Numbers only please.");
             }
-            if (choice < 0 || choice > allCuisines.getSize(e)) {
+            if (choice < 0 || choice > allCuisines.getSize()) {
                 System.out.println("Choice outside of range. Please chose again.");
             }
-        } while (choice < 0 || choice > allCuisines.getSize(e));
+        } while (choice < 0 || choice > allCuisines.getSize());
         return choice;
     }
 
-    private int getChoice(Item item) {
+    private int getChoice(Items items) {
         Scanner keyboard = new Scanner(System.in);
         int choice = -1;
         do {
@@ -163,10 +165,10 @@ public class Menu {
             } catch (NumberFormatException e) {
                 System.out.println("Invalid selection. Numbers only please.");
             }
-            if (choice < 0 || choice > item.getSize()) {
+            if (choice < 0 || choice > items.getSize()) {
                 System.out.println("Choice outside of range. Please chose again.");
             }
-        } while (choice < 0 || choice > item.getSize());
+        } while (choice < 0 || choice > items.getSize());
         return choice;
     }
 
@@ -195,14 +197,14 @@ public class Menu {
         allCuisines.addDish(AllCuisines.Enum.MEXICAN,"quesadilla", 14.99);
         allCuisines.addDish(AllCuisines.Enum.MEXICAN,"cos", 32.99);
 
-        dessert.addDessert("lody",12.22);
-        dessert.addDessert("lizak",9.99);
-        dessert.addDessert("ciastko",16.90);
-        dessert.addDessert("snikers",4.99);
+        desserts.add("lody",12.22);
+        desserts.add("lizak",9.99);
+        desserts.add("ciastko",16.90);
+        desserts.add("snikers",4.99);
 
-        drink.addDrink("kolka",5.90);
-        drink.addDrink("vodka",9.90);
-        drink.addDrink("łycha",12.90);
+        drinks.add("kolka",5.90);
+        drinks.add("vodka",9.90);
+        drinks.add("łycha",12.90);
 
     }
 }

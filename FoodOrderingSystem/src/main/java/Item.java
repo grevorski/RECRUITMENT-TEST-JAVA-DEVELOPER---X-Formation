@@ -1,6 +1,6 @@
 abstract class Item {
-    private  String name;
-    private double price;
+    private final String name;
+    private final double price;
 
     public Item(String name, double price) {
 
@@ -8,9 +8,6 @@ abstract class Item {
         this.price = price;
     }
 
-    public Item() {
-
-    }
 
     public String getName(){
         return name;
@@ -20,5 +17,7 @@ abstract class Item {
         return price;
     }
 
-    abstract int getSize();
+
+
+
 }
