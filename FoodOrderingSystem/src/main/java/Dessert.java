@@ -1,24 +1,26 @@
 import java.util.ArrayList;
+import java.util.List;
 
-public class Desserts extends Item{
+public class Dessert extends Item{
 
-    public Desserts(String name, double price) {
+
+    public Dessert(String name, double price) {
         super(name, price);
     }
 
-    public Desserts() {
-        super();
+    public Dessert() {
     }
+
 
     @Override
     public String toString() {
         return getName() + " " + getPrice() ;
     }
 
-    ArrayList<Desserts> desserts = new ArrayList<Desserts>();
+    private final List<Dessert> desserts = new ArrayList<Dessert>();
 
     public void addDessert(String name, double price){
-        desserts.add(new Desserts(name,price));
+        desserts.add(new Dessert(name,price));
     }
 
     public void printDesserts(){
@@ -27,7 +29,7 @@ public class Desserts extends Item{
         }
     }
 
-    public Desserts getDessert(int index){
+    public Dessert getDessert(int index){
         return desserts.get(index-1);
     }
 

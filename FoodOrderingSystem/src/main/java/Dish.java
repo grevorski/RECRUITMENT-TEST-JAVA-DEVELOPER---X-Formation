@@ -4,6 +4,7 @@ public class Dish extends Item {
         super(name, price);
     }
 
+
     int getSize() { return 0; }
 
     @Override

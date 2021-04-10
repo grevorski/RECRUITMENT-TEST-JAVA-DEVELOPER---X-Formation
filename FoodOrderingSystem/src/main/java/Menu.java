@@ -3,12 +3,9 @@ import java.util.Scanner;
 public class Menu {
 
     boolean exit;
-    private final Cuisines polish = new PolishCuisines();
-    private final Cuisines mexican = new MexicanCuisines();
-    private final Cuisines italian = new ItalianCuisines();
-    private final Desserts desserts = new Desserts();
-    private final Drinks drinks = new Drinks();
-
+    private final Dessert dessert = new Dessert();
+    private final Drink drink = new Drink();
+    private final AllCuisines allCuisines = new AllCuisines();
 
     private void printMenu() {
         displayHeader("Please make an order");
@@ -19,7 +16,7 @@ public class Menu {
     }
 
 
-    private int getChoice() {
+    private int getChoice() { //for choosing type of order
         Scanner keyboard = new Scanner(System.in);
         int choice = -1;
         do {
@@ -43,15 +40,15 @@ public class Menu {
                 exit = true;
                 break;
             case 1:
-                Cuisines cuisines = (Cuisines) choseCuisines();
-                makeOrder(cuisines);
+                AllCuisines.Enum e = (AllCuisines.Enum) choseCuisines();
+                makeOrder(e);
                 break;
             case 2:
                 drinkOrder();
                 break;
             case 3:
-                Cuisines cuisines1 = (Cuisines) choseCuisines();
-                makeOrder(cuisines1);
+                AllCuisines.Enum e1 = (AllCuisines.Enum) choseCuisines();
+                makeOrder(e1);
                 drinkOrder();
                 break;
             default:
@@ -62,8 +59,8 @@ public class Menu {
     private void drinkOrder(){
         Scanner sc = new Scanner(System.in);
         displayHeader("DRINKS");
-        drinks.printDrinks();
-        int choice = getChoice(drinks);
+        drink.printDrinks();
+        int choice = getChoice(drink);
         do{
             System.out.println("With: \n1)ice\n2)lemon\n3)without");
             try {
@@ -72,17 +69,17 @@ public class Menu {
                 System.out.println("Invalid selection. Numbers only please.");
             }
             if(choice == 1 ) {
-                drinks.isIce = true;
-                System.out.println("Ordered drink: " + drinks.getDrink(choice) + " with ice");
+                drink.isIce = true;
+                System.out.println("Ordered drink: " + drink.getDrink(choice) + " with ice");
             }
             else if(choice == 2) {
-                drinks.isLemon = true;
-                System.out.println("Ordered drink: " + drinks.getDrink(choice) + " with lemon" );
+                drink.isLemon = true;
+                System.out.println("Ordered drink: " + drink.getDrink(choice) + " with lemon" );
             }
             else if(choice == 3) {
-                drinks.isLemon=false;
-                drinks.isIce = false;
-                System.out.println("Ordered drink: " + drinks.getDrink(choice) );
+                drink.isLemon=false;
+                drink.isIce = false;
+                System.out.println("Ordered drink: " + drink.getDrink(choice) );
             } else System.out.println("Choice outside of range. Please chose again.");
         }while (choice < 0 || choice > 4);
 
@@ -99,14 +96,15 @@ public class Menu {
             } catch (NumberFormatException e) {
                 System.out.println("Invalid selection. Numbers only please.");
             }
-            if(choice == 1 ) return polish;
-            else if(choice == 2) return italian;
-            else if(choice == 3) return mexican;
+            if(choice == 1 ) return AllCuisines.Enum.POLISH;
+            else if(choice == 2) return AllCuisines.Enum.ITALIAN;
+            else if(choice == 3) return AllCuisines.Enum.MEXICAN;
             else System.out.println("Choice outside of range. Please chose again.");
 
         } while (choice < 0 || choice > 4);
         return null;
     }
+
     private void displayHeader(String message){
         System.out.println();
         int width = message.length() + 6;
@@ -128,30 +126,30 @@ public class Menu {
         System.out.println("+-----------------------------------+");
     }
 
-    private void makeOrder(Cuisines input){
+    private void makeOrder(AllCuisines.Enum e){
         displayHeader("LUNCH");
-        input.printDishes();
-        int choice = getChoice(input);
+        allCuisines.printDishes(e);
+        int choice = getChoice(e);
         displayHeader("DESSERT");
-        desserts.printDesserts();
-        int dessertChoice = getChoice(desserts);
-        System.out.println("Ordered lunch: " + input.getDish(choice) + "\nOrdered dessert: " + desserts.getDessert(dessertChoice));
+        dessert.printDesserts();
+        int dessertChoice = getChoice(dessert);
+        System.out.println("Ordered lunch: " + allCuisines.getDish(e,choice) + "\nOrdered dessert: " + dessert.getDessert(dessertChoice));
     }
 
-    private int getChoice(Cuisines c) {
+    private int getChoice(AllCuisines.Enum e) {
         Scanner keyboard = new Scanner(System.in);
         int choice = -1;
         do {
             System.out.print("Enter your choice: ");
             try {
                 choice = Integer.parseInt(keyboard.nextLine());
-            } catch (NumberFormatException e) {
+            } catch (NumberFormatException exception) {
                 System.out.println("Invalid selection. Numbers only please.");
             }
-            if (choice < 0 || choice > c.getSize()) {
+            if (choice < 0 || choice > allCuisines.getSize(e)) {
                 System.out.println("Choice outside of range. Please chose again.");
             }
-        } while (choice < 0 || choice > c.getSize());
+        } while (choice < 0 || choice > allCuisines.getSize(e));
         return choice;
     }
 
@@ -181,29 +179,30 @@ public class Menu {
         }
     }
     public void createMenu(){
-        polish.addDish("kotlet",9.99);
-        polish.addDish("zraz",29.99);
-        polish.addDish("kaczka",39.99);
-        polish.addDish("xD",42.99);
-        polish.addDish("123",94.99);
+        allCuisines.initializeCuisines();
+        allCuisines.addDish(AllCuisines.Enum.POLISH,"kotlet",9.99);
+        allCuisines.addDish(AllCuisines.Enum.POLISH,"zraz",29.99);
+        allCuisines.addDish(AllCuisines.Enum.POLISH,"kaczka",39.99);
+        allCuisines.addDish(AllCuisines.Enum.POLISH,"xD",42.99);
+        allCuisines.addDish(AllCuisines.Enum.POLISH,"123",94.99);
 
-        italian.addDish("pasta",100);
-        italian.addDish("czedar",15);
-        italian.addDish("makaroni",32);
+        allCuisines.addDish(AllCuisines.Enum.ITALIAN,"pasta",100);
+        allCuisines.addDish(AllCuisines.Enum.ITALIAN,"czedar",15);
+        allCuisines.addDish(AllCuisines.Enum.ITALIAN,"makaroni",32);
 
-        mexican.addDish("takosy", 14.99);
-        mexican.addDish("burito", 19.99);
-        mexican.addDish("quesadilla", 14.99);
-        mexican.addDish("cos", 32.99);
+        allCuisines.addDish(AllCuisines.Enum.MEXICAN,"takosy", 14.99);
+        allCuisines.addDish(AllCuisines.Enum.MEXICAN,"burito", 19.99);
+        allCuisines.addDish(AllCuisines.Enum.MEXICAN,"quesadilla", 14.99);
+        allCuisines.addDish(AllCuisines.Enum.MEXICAN,"cos", 32.99);
 
-        desserts.addDessert("lody",12.22);
-        desserts.addDessert("lizak",9.99);
-        desserts.addDessert("ciastko",16.90);
-        desserts.addDessert("snikers",4.99);
+        dessert.addDessert("lody",12.22);
+        dessert.addDessert("lizak",9.99);
+        dessert.addDessert("ciastko",16.90);
+        dessert.addDessert("snikers",4.99);
 
-        drinks.addDrink("kolka",5.90);
-        drinks.addDrink("vodka",9.90);
-        drinks.addDrink("łycha",12.90);
+        drink.addDrink("kolka",5.90);
+        drink.addDrink("vodka",9.90);
+        drink.addDrink("łycha",12.90);
 
     }
 }
