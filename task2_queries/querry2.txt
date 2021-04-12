@@ -1,0 +1,1 @@
+select XF.Country.name from XF.Country join XF.City on XF.Country.CountryID = XF.City.CountryID full join XF.Building on XF.City.CityID = XF.Building.CityID GROUP BY XF.Country.name having bool_and(XF.Building.BuildingID is null);
