@@ -47,7 +47,7 @@ public class Menu {
             else if(choice == 3) return Cuisine.Type.MEXICAN;
             else System.out.println("Choice outside of range. Please chose again.");
 
-        } while (choice < 0 || choice > 4);
+        } while (choice < 0 || choice > Cuisine.Type.values().length);
         return null;
     }
 

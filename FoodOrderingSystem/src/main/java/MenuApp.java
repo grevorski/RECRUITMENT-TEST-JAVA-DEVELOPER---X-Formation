@@ -11,6 +11,7 @@ public class MenuApp {
             printMenu();
             int choice = getChoice();
             performAction(choice);
+
         }
     }
 
